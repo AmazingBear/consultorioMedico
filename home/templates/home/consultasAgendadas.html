@@ -8,9 +8,15 @@
     <form action="{% url 'consultasAgendadas' %}" method="post">
         {% csrf_token %}
       {% for consultas in dados %}
-            <p>{{consultas.paciente}}</p>
-            <p>{{consultas.medico}}</p>
-            <p>{{consultas.diahorario}}</p>
+        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+            <div class="card-header">Hospital Flor de Lis</div>
+            <div class="card-body">
+                <h5 class="card-title">Paciente:</h5> {{consultas.paciente}}
+                    <p><h5 class="card-title">Médico:</h5> {{consultas.medico}}</p>
+                    <p><h5 class="card-title">Horário:</h5> {{consultas.diahorario}}</p>
+        </div>
+            </div>
+            </div>
         <br><br>
       {% endfor %}
         <a class="btn btn-outline-primary" href="{% url 'home' %}">Voltar</a>

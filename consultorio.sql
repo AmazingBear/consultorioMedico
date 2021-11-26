@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24-Nov-2021 às 15:01
+-- Tempo de geração: 26-Nov-2021 às 14:58
 -- Versão do servidor: 10.4.21-MariaDB
 -- versão do PHP: 7.3.30
 
@@ -97,7 +97,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (33, 'Can add consulta', 9, 'add_consulta'),
 (34, 'Can change consulta', 9, 'change_consulta'),
 (35, 'Can delete consulta', 9, 'delete_consulta'),
-(36, 'Can view consulta', 9, 'view_consulta');
+(36, 'Can view consulta', 9, 'view_consulta'),
+(37, 'Can add especializacao', 10, 'add_especializacao'),
+(38, 'Can change especializacao', 10, 'change_especializacao'),
+(39, 'Can delete especializacao', 10, 'delete_especializacao'),
+(40, 'Can view especializacao', 10, 'view_especializacao');
 
 -- --------------------------------------------------------
 
@@ -118,6 +122,13 @@ CREATE TABLE `auth_user` (
   `is_active` tinyint(1) NOT NULL,
   `date_joined` datetime(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `auth_user`
+--
+
+INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
+(1, 'pbkdf2_sha256$260000$D7m5manXRBJf8o72jQIgU5$t4Hbl0vzmyLKnkfknUgextzM/Xip/p1/bTNWAxGwbew=', '2021-11-26 12:02:16.840039', 1, 'master', '', '', 'master@master.com', 1, 1, '2021-11-26 12:02:04.479977');
 
 -- --------------------------------------------------------
 
@@ -160,6 +171,34 @@ CREATE TABLE `django_admin_log` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `django_admin_log`
+--
+
+INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`, `action_flag`, `change_message`, `content_type_id`, `user_id`) VALUES
+(1, '2021-11-26 12:02:32.930817', '1', '1', 1, '[{\"added\": {}}]', 10, 1),
+(2, '2021-11-26 12:02:37.425009', '2', '2', 1, '[{\"added\": {}}]', 10, 1),
+(3, '2021-11-26 12:02:40.422697', '3', '3', 1, '[{\"added\": {}}]', 10, 1),
+(4, '2021-11-26 12:02:43.624427', '4', '4', 1, '[{\"added\": {}}]', 10, 1),
+(5, '2021-11-26 12:02:46.584113', '5', '5', 1, '[{\"added\": {}}]', 10, 1),
+(6, '2021-11-26 12:02:50.405255', '6', '6', 1, '[{\"added\": {}}]', 10, 1),
+(7, '2021-11-26 12:02:54.989301', '7', '7', 1, '[{\"added\": {}}]', 10, 1),
+(8, '2021-11-26 12:02:58.285836', '8', '8', 1, '[{\"added\": {}}]', 10, 1),
+(9, '2021-11-26 12:28:19.724149', '1', 'Testando da Silva', 1, '[{\"added\": {}}]', 7, 1),
+(10, '2021-11-26 12:34:08.062978', '1', 'Francisco da Silva', 1, '[{\"added\": {}}]', 8, 1),
+(11, '2021-11-26 12:34:20.478893', '1', '1', 1, '[{\"added\": {}}]', 9, 1),
+(12, '2021-11-26 12:56:05.882700', '1', 'Testando da Silva', 3, '', 7, 1),
+(13, '2021-11-26 12:57:49.625330', '1', 'Testando da Silva', 3, '', 7, 1),
+(14, '2021-11-26 13:13:30.486078', '2', 'PacientePaciente', 3, '', 8, 1),
+(15, '2021-11-26 13:13:30.532441', '1', 'Francisco da Silva', 3, '', 8, 1),
+(16, '2021-11-26 13:13:41.076535', '1', '1', 3, '', 9, 1),
+(17, '2021-11-26 13:13:47.829654', '3', 'awfawfawf', 3, '', 7, 1),
+(18, '2021-11-26 13:13:47.866143', '2', 'Testando da Silva', 3, '', 7, 1),
+(19, '2021-11-26 13:13:47.961146', '1', 'Testando da Silva', 3, '', 7, 1),
+(20, '2021-11-26 13:13:53.554573', '2', 'PacientePaciente', 3, '', 8, 1),
+(21, '2021-11-26 13:13:53.593119', '1', 'Francisco da Silva', 3, '', 8, 1),
+(22, '2021-11-26 13:46:58.875187', '2', '2', 1, '[{\"added\": {}}]', 9, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -183,6 +222,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (4, 'auth', 'user'),
 (5, 'contenttypes', 'contenttype'),
 (9, 'home', 'consulta'),
+(10, 'home', 'especializacao'),
 (7, 'home', 'medico'),
 (8, 'home', 'paciente'),
 (6, 'sessions', 'session');
@@ -205,28 +245,33 @@ CREATE TABLE `django_migrations` (
 --
 
 INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
-(1, 'contenttypes', '0001_initial', '2021-11-24 14:00:17.327323'),
-(2, 'auth', '0001_initial', '2021-11-24 14:00:24.809085'),
-(3, 'admin', '0001_initial', '2021-11-24 14:00:26.236797'),
-(4, 'admin', '0002_logentry_remove_auto_add', '2021-11-24 14:00:26.303816'),
-(5, 'admin', '0003_logentry_add_action_flag_choices', '2021-11-24 14:00:26.342676'),
-(6, 'contenttypes', '0002_remove_content_type_name', '2021-11-24 14:00:26.886589'),
-(7, 'auth', '0002_alter_permission_name_max_length', '2021-11-24 14:00:27.677797'),
-(8, 'auth', '0003_alter_user_email_max_length', '2021-11-24 14:00:27.883435'),
-(9, 'auth', '0004_alter_user_username_opts', '2021-11-24 14:00:28.102217'),
-(10, 'auth', '0005_alter_user_last_login_null', '2021-11-24 14:00:29.101034'),
-(11, 'auth', '0006_require_contenttypes_0002', '2021-11-24 14:00:29.275220'),
-(12, 'auth', '0007_alter_validators_add_error_messages', '2021-11-24 14:00:29.435310'),
-(13, 'auth', '0008_alter_user_username_max_length', '2021-11-24 14:00:29.490724'),
-(14, 'auth', '0009_alter_user_last_name_max_length', '2021-11-24 14:00:29.546216'),
-(15, 'auth', '0010_alter_group_name_max_length', '2021-11-24 14:00:29.599989'),
-(16, 'auth', '0011_update_proxy_permissions', '2021-11-24 14:00:29.648019'),
-(17, 'auth', '0012_alter_user_first_name_max_length', '2021-11-24 14:00:29.752015'),
-(18, 'home', '0001_initial', '2021-11-24 14:00:31.324326'),
-(19, 'home', '0002_alter_consulta_medico', '2021-11-24 14:00:32.587496'),
-(20, 'home', '0003_auto_20211124_1046', '2021-11-24 14:00:34.004510'),
-(21, 'home', '0004_paciente_senha', '2021-11-24 14:00:34.302762'),
-(22, 'sessions', '0001_initial', '2021-11-24 14:00:34.649596');
+(1, 'contenttypes', '0001_initial', '2021-11-26 12:00:39.095515'),
+(2, 'auth', '0001_initial', '2021-11-26 12:00:44.164111'),
+(3, 'admin', '0001_initial', '2021-11-26 12:00:45.572531'),
+(4, 'admin', '0002_logentry_remove_auto_add', '2021-11-26 12:00:45.624576'),
+(5, 'admin', '0003_logentry_add_action_flag_choices', '2021-11-26 12:00:45.670412'),
+(6, 'contenttypes', '0002_remove_content_type_name', '2021-11-26 12:00:47.032455'),
+(7, 'auth', '0002_alter_permission_name_max_length', '2021-11-26 12:00:47.757188'),
+(8, 'auth', '0003_alter_user_email_max_length', '2021-11-26 12:00:47.840725'),
+(9, 'auth', '0004_alter_user_username_opts', '2021-11-26 12:00:47.898829'),
+(10, 'auth', '0005_alter_user_last_login_null', '2021-11-26 12:00:48.418077'),
+(11, 'auth', '0006_require_contenttypes_0002', '2021-11-26 12:00:48.468395'),
+(12, 'auth', '0007_alter_validators_add_error_messages', '2021-11-26 12:00:48.510589'),
+(13, 'auth', '0008_alter_user_username_max_length', '2021-11-26 12:00:48.635617'),
+(14, 'auth', '0009_alter_user_last_name_max_length', '2021-11-26 12:00:48.742312'),
+(15, 'auth', '0010_alter_group_name_max_length', '2021-11-26 12:00:48.898505'),
+(16, 'auth', '0011_update_proxy_permissions', '2021-11-26 12:00:48.938734'),
+(17, 'auth', '0012_alter_user_first_name_max_length', '2021-11-26 12:00:49.033167'),
+(18, 'home', '0001_initial', '2021-11-26 12:00:50.869033'),
+(19, 'home', '0002_alter_consulta_medico', '2021-11-26 12:00:52.235054'),
+(20, 'home', '0003_auto_20211124_1046', '2021-11-26 12:00:52.793535'),
+(21, 'home', '0004_paciente_senha', '2021-11-26 12:00:52.890262'),
+(22, 'home', '0005_auto_20211126_0826', '2021-11-26 12:00:54.380482'),
+(23, 'home', '0006_alter_especializacao_especializacao', '2021-11-26 12:00:54.412476'),
+(24, 'home', '0007_alter_especializacao_especializacao', '2021-11-26 12:00:54.458602'),
+(25, 'home', '0008_alter_especializacao_especializacao', '2021-11-26 12:00:54.604483'),
+(26, 'sessions', '0001_initial', '2021-11-26 12:00:55.305872'),
+(27, 'home', '0009_alter_medico_especializacao', '2021-11-26 12:06:36.131328');
 
 -- --------------------------------------------------------
 
@@ -239,6 +284,13 @@ CREATE TABLE `django_session` (
   `session_data` longtext NOT NULL,
   `expire_date` datetime(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `django_session`
+--
+
+INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('y5o98kzdnvisa5bwzt66trsw7n6qd6fq', '.eJxVjDsOwyAQRO9CHaEFAwsp0_sMaPkFJxGWjF1FuXtsyUXSjea9mTfztK3Vbz0vfkrsygS7_HaB4jO3A6QHtfvM49zWZQr8UPhJOx_nlF-30_07qNTrvkYsVgWjklRgBZLWKNDEorSDgs5JAEQLe4rBFIHSOlfIaAFJDoMk9vkCo7U2FQ:1mqZvk:bG0sKvejZGk7x6Jvgm3NaQgQSeYf1DgSvvtX-aQ7oP0', '2021-12-10 12:02:16.871184');
 
 -- --------------------------------------------------------
 
@@ -253,6 +305,38 @@ CREATE TABLE `home_consulta` (
   `paciente_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `home_consulta`
+--
+
+INSERT INTO `home_consulta` (`id`, `medico_id`, `diahorario`, `paciente_id`) VALUES
+(2, 4, '2021-12-31 13:46:48.000000', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `home_especializacao`
+--
+
+CREATE TABLE `home_especializacao` (
+  `id` bigint(20) NOT NULL,
+  `especializacao` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `home_especializacao`
+--
+
+INSERT INTO `home_especializacao` (`id`, `especializacao`) VALUES
+(1, 'Cardiologista'),
+(2, 'Pediatra'),
+(3, 'Urologista'),
+(4, 'Geriatria'),
+(5, 'Oftalmologista'),
+(6, 'Dermatologia'),
+(7, 'Emergência'),
+(8, 'Infectologia');
+
 -- --------------------------------------------------------
 
 --
@@ -262,9 +346,16 @@ CREATE TABLE `home_consulta` (
 CREATE TABLE `home_medico` (
   `id` bigint(20) NOT NULL,
   `nome` varchar(40) NOT NULL,
-  `especializacao` varchar(1) NOT NULL,
+  `especializacao_id` bigint(20) NOT NULL,
   `foto` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `home_medico`
+--
+
+INSERT INTO `home_medico` (`id`, `nome`, `especializacao_id`, `foto`) VALUES
+(4, 'Medico Bom', 6, '');
 
 -- --------------------------------------------------------
 
@@ -281,6 +372,13 @@ CREATE TABLE `home_paciente` (
   `email` varchar(254) DEFAULT NULL,
   `senha` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `home_paciente`
+--
+
+INSERT INTO `home_paciente` (`id`, `nome`, `cpf`, `telefone`, `endereco`, `email`, `senha`) VALUES
+(3, 'Jeronimo Souza', '12345678912', '13442534423', 'Rua 9', 'Jero@jero.com', 'jeronimo123');
 
 --
 -- Índices para tabelas despejadas
@@ -368,10 +466,17 @@ ALTER TABLE `home_consulta`
   ADD KEY `home_consulta_medico_id_7d79f074` (`medico_id`);
 
 --
+-- Índices para tabela `home_especializacao`
+--
+ALTER TABLE `home_especializacao`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `home_medico`
 --
 ALTER TABLE `home_medico`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `home_medico_especializacao_id_06ad38bc` (`especializacao_id`);
 
 --
 -- Índices para tabela `home_paciente`
@@ -399,13 +504,13 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT de tabela `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de tabela `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `auth_user_groups`
@@ -423,37 +528,43 @@ ALTER TABLE `auth_user_user_permissions`
 -- AUTO_INCREMENT de tabela `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de tabela `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de tabela `home_consulta`
 --
 ALTER TABLE `home_consulta`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `home_especializacao`
+--
+ALTER TABLE `home_especializacao`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `home_medico`
 --
 ALTER TABLE `home_medico`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `home_paciente`
 --
 ALTER TABLE `home_paciente`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restrições para despejos de tabelas
@@ -499,6 +610,12 @@ ALTER TABLE `django_admin_log`
 ALTER TABLE `home_consulta`
   ADD CONSTRAINT `home_consulta_medico_id_7d79f074_fk_home_medico_id` FOREIGN KEY (`medico_id`) REFERENCES `home_medico` (`id`),
   ADD CONSTRAINT `home_consulta_paciente_id_cdaf67cf_fk_home_paciente_id` FOREIGN KEY (`paciente_id`) REFERENCES `home_paciente` (`id`);
+
+--
+-- Limitadores para a tabela `home_medico`
+--
+ALTER TABLE `home_medico`
+  ADD CONSTRAINT `home_medico_especializacao_id_06ad38bc_fk_home_especializacao_id` FOREIGN KEY (`especializacao_id`) REFERENCES `home_especializacao` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
