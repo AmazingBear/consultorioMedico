@@ -15,8 +15,8 @@
           {% endfor %}
         </select>
             <label for="selectMedico">Escolha o Médico:</label>
-                <select class="form-control" name="paciente" id="selectMedico">
-                    <option value="{{paciente.id}}">-------</option>
+                <select class="form-control" name="medico" id="selectMedico">
+                    <option value="{{medico.id}}">-------</option>
                     {% for medico in dados2 %}
                         <option value="{{medico.id}}">{{medico.nome}}</option>
                     {% endfor %}

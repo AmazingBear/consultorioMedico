@@ -56,7 +56,6 @@ def cadMedico(request):
 def cadConsulta(request):
     dados = Paciente.objects.all()
     dados2 = Medico.objects.all()
-
     if request.method == "POST":
         paciente = request.POST.get('paciente')
         medico = request.POST.get('medico')
