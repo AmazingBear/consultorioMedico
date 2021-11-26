@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{%load static%}
+
+{% block Titulo%} Agendamento Consultas {% endblock%}
+
+{% block container%}
+    <h2 class="mt-4 mb-4" >Agendamento de Consultas</h2>
+    <form action="{% url 'cadConsulta' %}" method="post">
+        {% csrf_token %}
+      <label for="selectPaciente">Escolha o Paciente:</label>
+        <select class="form-control" name="paciente" id="selectPaciente">
+          <option value="{{paciente.id}}">-------</option>
+          {% for paciente in dados %}
+            <option value="{{paciente.id}}">{{paciente.nome}}</option>
+          {% endfor %}
+        </select>
+            <label for="selectMedico">Escolha o Médico:</label>
+                <select class="form-control" name="paciente" id="selectMedico">
+                    <option value="{{paciente.id}}">-------</option>
+                    {% for medico in dados2 %}
+                        <option value="{{medico.id}}">{{medico.nome}}</option>
+                    {% endfor %}
+                </select>
+        <br>
+        <input type="datetime-local" id="datetime" name="datetime">
+        <br><br>
+      <button type="submit" class="btn btn-primary">Cadastrar</button>
+      
+        <a class="btn btn-outline-primary" href="{% url 'home' %}">Voltar</a>
+</form>
+{% endblock %}

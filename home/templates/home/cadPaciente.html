@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{%load static%}
+
+{% block Titulo%} Cadastro Paciente {% endblock%}
+
+{% block container%}
+    <div class="container"
+     style="max-width:1000px;
+     padding:2rem; margin-top:3rem">
+
+    <h2 class="mt-4 mb-4" >Cadastro de Pacientes</h2>
+    <form action="{% url 'cadPaciente' %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">Nome</label>
+            <input type="text" class="form-control" name="nome">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">CPF</label>
+            <input type="text" class="form-control" name="cpf">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="text" class="form-control" name="email">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Telefone</label>
+            <input type="text" class="form-control" name="telefone">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Endereço</label>
+            <input type="text" class="form-control" name="endereco">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Senha</label>
+            <input type="password" class="form-control" name="senha">
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <a class="btn btn-outline-primary" href="{% url 'home' %}">Voltar</a>
+    </form>
+{% endblock %}

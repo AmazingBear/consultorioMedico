@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{%load static%}
+
+{% block Titulo%} Cadastro Médicos {% endblock%}
+
+{% block container%}
+    <h2 class="mt-4 mb-4" >Cadastro de Médicos</h2>
+    <form action="{% url 'cadMedico' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+      <div class="mb-3">
+        <label for="1" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="1" name="nome">
+      </div>
+      <label for="selectEspecializacao">Escolha a Especialização:</label>
+        <select class="form-control" name="especializacao" id="selectEspecializacao">
+          <option value="{{especializacao.id}}">-------</option>
+          {% for especializacao in dados %}
+            <option value="{{especializacao.id}}">{{especializacao.especializacao}}</option>
+          {% endfor %}
+        </select>
+      <br>
+      <input type="file" name="" id="">
+      <br><br><br><br>
+      <button type="submit" class="btn btn-primary">Cadastrar</button>
+
+        <a class="btn btn-outline-primary" href="{% url 'home' %}">Voltar</a>
+</form>
+{% endblock %}

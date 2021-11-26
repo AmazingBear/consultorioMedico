@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{%load static%}
+
+{% block Titulo%} Consultas Agendadas {% endblock%}
+
+{% block container%}
+    <h2 class="mt-4 mb-4" >Consultas Agendadas</h2>
+    <form action="{% url 'consultasAgendadas' %}" method="post">
+        {% csrf_token %}
+      {% for consultas in dados %}
+            <p>{{consultas.paciente}}</p>
+            <p>{{consultas.medico}}</p>
+            <p>{{consultas.diahorario}}</p>
+        <br><br>
+      {% endfor %}
+        <a class="btn btn-outline-primary" href="{% url 'home' %}">Voltar</a>
+</form>
+{% endblock %}
