@@ -4,26 +4,27 @@
 {% block Titulo%} Consultas Agendadas {% endblock%}
 
 {% block container%}
-<h2 class="mt-4 mb-4" xmlns="http://www.w3.org/1999/html">Consultas Agendadas</h2>
+<br><br><br>
+<h2 class="mt-4 mb-4" xmlns="http://www.w3.org/1999/html" style="color: white">Consultas Agendadas</h2>
     <form action="{% url 'consultasAgendadas' %}" method="post">
+        <br><br>
         {% csrf_token %}
 
-        <div class="grid">
-
-      {% for consultas in dados %}
-
-                <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+        <div class="row">
+          {% for consultas in dados %}
+            <div class="col-sm-4">
+                <div class="card text-black bg-white mb-3" style="max-width: 18rem;">
                     <div class="card-header">Hospital Flor de Lis</div>
-                        <div class="card-body">
-                            <h5 class="card-title">Paciente:</h5> {{consultas.paciente}}
-                            <p><h5 class="card-title">Médico:</h5> {{consultas.medico}}</p>
-                            <p><h5 class="card-title">Horário:</h5> {{consultas.diahorario}}</p>
-                        </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Paciente:</h5> {{consultas.paciente}}
+                        <p><h5 class="card-title">Médico:</h5> {{consultas.medico}}</p>
+                        <p><h5 class="card-title">Horário:</h5> {{consultas.diahorario}}</p>
                     </div>
                 </div>
-        <br><br>
-      {% endfor %}
+            </div>
+          {% endfor %}
+        </div>
 
-        <a class="btn btn-outline-primary" href="{% url 'home' %}">Voltar</a>
+        <br><br>
 </form>
 {% endblock %}

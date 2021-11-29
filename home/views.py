@@ -10,10 +10,8 @@ def index(request):
     dados = Consulta.objects.all()
     return render(request, 'home/index.html', {"dados": dados})
 
-
 def login(request):
     return render(request, 'home/login.html')
-
 
 def cadPaciente(request):
     if request.method == "POST":
@@ -22,7 +20,6 @@ def cadPaciente(request):
         email = request.POST.get('email')
         telefone = request.POST.get('telefone')
         endereco = request.POST.get('endereco')
-        senha = request.POST.get('senha')
 
         P = Paciente()
         P.nome = nome
@@ -30,7 +27,6 @@ def cadPaciente(request):
         P.email = email
         P.telefone = telefone
         P.endereco = endereco
-        P.senha = senha
 
         P.save()
         return redirect('cadPaciente')
@@ -43,10 +39,16 @@ def cadMedico(request):
     if request.method == "POST":
         nome = request.POST.get('nome')
         especializacao = request.POST.get('especializacao')
+        foto = request.POST.get('foto')
+        email = request.POST.get('email')
+        senha = request.POST.get('senha')
 
         M = Medico()
         M.nome = nome
         M.especializacao = Especializacao.objects.get(id=especializacao)
+        M.foto = foto
+        M.email = email
+        M.senha = senha
 
         M.save()
         return redirect('cadMedico')

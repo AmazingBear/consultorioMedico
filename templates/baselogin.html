@@ -12,14 +12,7 @@
 <div class="container mt-5" >
     <div class="header">
         <img src="{% static 'images/florDeLis.svg' %}" alt="My SVG" width="50px" height="50px"/>
-      <a href="../consultasAgendadas" class="logo">Hospital Flor de Lis</a>
-      <div class="header-right">
-          <a style="font-size: 20px" href="{% url 'cadPaciente' %}">Cadastrar Paciente</a>
-          <a style="font-size: 20px" href="{% url 'cadConsulta' %}">Agendar Consulta</a>
-          <a style="font-size: 20px" href="{% url 'consultasAgendadas' %}">Consultas Agendadas</a>
-          <a style="font-size: 20px" href="{% url 'cadMedico' %}">Cadastrar Médico</a>
-          <a class="btn btn-dark" style="color: white" href="{% url 'login' %}">LogOut</a>
-      </div>
+      <a class="logo">Hospital Flor de Lis</a>
 </div>
 {% block container %}
 

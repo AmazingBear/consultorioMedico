@@ -4,25 +4,43 @@
 {% block Titulo%} Cadastro Médicos {% endblock%}
 
 {% block container%}
-    <h2 class="mt-4 mb-4" >Cadastro de Médicos</h2>
+<br><br><br>
+    <h2 class="mt-4 mb-4" style="color: white">Cadastro de Médicos</h2>
     <form action="{% url 'cadMedico' %}" method="post" enctype="multipart/form-data">
+      <br>
         {% csrf_token %}
       <div class="mb-3">
-        <label for="1" class="form-label">Nome</label>
+        <label for="1" class="form-label" style="color: white; font-size: 25px">Nome</label>
+        <br><br>
         <input type="text" class="form-control" id="1" name="nome">
       </div>
-      <label for="selectEspecializacao">Escolha a Especialização:</label>
+      <br><br><br>
+      <label for="selectEspecializacao" style="color: white; font-size: 25px">Escolha a Especialização:</label>
+      <br><br>
         <select class="form-control" name="especializacao" id="selectEspecializacao">
           <option value="{{especializacao.id}}">-------</option>
           {% for especializacao in dados %}
             <option value="{{especializacao.id}}">{{especializacao.especializacao}}</option>
           {% endfor %}
         </select>
-      <br>
-      <input type="file" name="" id="">
+      <br><br><br>
+      <label style="color: white; font-size: 25px">Adicione uma Foto de Perfil:</label>
+      <br><br>
+      <input type="file" name="foto" id="foto">
+      <br><br><br>
+      <div class="mb-3">
+        <label class="form-label" style="color: white; font-size: 25px">Email</label>
+        <br><br>
+        <input type="text" class="form-control" name="email">
+      </div>
+      <br><br><br>
+      <div class="mb-3">
+        <label class="form-label" style="color: white; font-size: 25px">Senha</label>
+        <br><br>
+        <input type="password" class="form-control" name="senha">
+      </div>
+      <br><br>
+      <button type="submit" style="font-size: 20px" class="btn btn-dark">Cadastrar</button>
       <br><br><br><br>
-      <button type="submit" class="btn btn-primary">Cadastrar</button>
-      
-        <a class="btn btn-outline-primary" href="{% url 'home' %}">Voltar</a>
 </form>
 {% endblock %}

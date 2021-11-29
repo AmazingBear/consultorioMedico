@@ -4,28 +4,33 @@
 {% block Titulo%} Agendamento Consultas {% endblock%}
 
 {% block container%}
-    <h2 class="mt-4 mb-4" >Agendamento de Consultas</h2>
+<br><br><br><br>
+    <h2 class="mt-4 mb-4" style="color: white">Agendamento de Consultas</h2>
+<br><br>
     <form action="{% url 'cadConsulta' %}" method="post">
         {% csrf_token %}
-      <label for="selectPaciente">Escolha o Paciente:</label>
+      <label for="selectPaciente" style="color: white; font-size: 25px">Escolha o Paciente:</label>
+        <br><br>
         <select class="form-control" name="paciente" id="selectPaciente">
           <option value="{{paciente.id}}">-------</option>
           {% for paciente in dados %}
             <option value="{{paciente.id}}">{{paciente.nome}}</option>
           {% endfor %}
         </select>
-            <label for="selectMedico">Escolha o Médico:</label>
+        <br><br><br>
+            <label for="selectMedico" style="color: white; font-size: 25px">Escolha o Médico:</label>
+        <br><br>
                 <select class="form-control" name="medico" id="selectMedico">
                     <option value="{{medico.id}}">-------</option>
                     {% for medico in dados2 %}
                         <option value="{{medico.id}}">{{medico.nome}}</option>
                     {% endfor %}
                 </select>
+        <br><br><br>
+        <label style="color: white; font-size: 25px">Escolha a Data e o Horário:</label>
         <br>
         <input type="datetime-local" id="datetime" name="datetime">
-        <br><br>
-      <button type="submit" class="btn btn-primary">Cadastrar</button>
-      
-        <a class="btn btn-outline-primary" href="{% url 'home' %}">Voltar</a>
+        <br><br><br><br>
+      <button style="font-size: 20px" type="submit" class="btn btn-dark">Cadastrar</button>
 </form>
 {% endblock %}
